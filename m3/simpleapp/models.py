@@ -8,6 +8,7 @@ class Product(models.Model):
     quantity = models.IntegerField(validators=[MinValueValidator(0)],)
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE, related_name='products',)
     price = models.FloatField(validators=[MinValueValidator(0.0)],)
+    material = models.ManyToManyField(to='Material', through='ProductMaterial', related_name='materials',)
 
     def __str__(self):
         return f'{self.name.title()}: {self.description[:20]}'

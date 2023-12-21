@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Product
 from .filters import ProductFilter
+from .forms import ProductForm
+from django.http import HttpResponseRedirect
 
 
 
@@ -63,3 +65,15 @@ class ProductDetail(DetailView):
     template_name = 'product.html'
     # Название объекта, в котором будет выбранный пользователем продукт
     context_object_name = 'product'
+
+
+def create_product(request):
+    form = ProductForm()
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/products/')
+
+    return render(request, 'product_edit.html', {'form': form})
