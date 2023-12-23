@@ -1,7 +1,7 @@
 from datetime import datetime
 from pprint import pprint
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Product
 from .filters import ProductFilter
 from .forms import ProductForm
@@ -67,13 +67,14 @@ class ProductDetail(DetailView):
     context_object_name = 'product'
 
 
-def create_product(request):
-    form = ProductForm()
+class ProductCreate(CreateView):
+    form_class = ProductForm
+    model = Product
+    template_name = 'product_edit.html'
 
-    if request.method == 'POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/products/')
 
-    return render(request, 'product_edit.html', {'form': form})
+class ProductUpdate(UpdateView):
+    form_class = ProductForm
+    model = Product
+    template_name = 'product_edit.html'
+
