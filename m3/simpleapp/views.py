@@ -1,7 +1,8 @@
 from datetime import datetime
 from pprint import pprint
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Product
 from .filters import ProductFilter
 from .forms import ProductForm
@@ -78,3 +79,8 @@ class ProductUpdate(UpdateView):
     model = Product
     template_name = 'product_edit.html'
 
+
+class ProductDelete(DeleteView):
+    model = Product
+    template_name = 'product_delete.html'
+    success_url = reverse_lazy('product_list')

@@ -32,7 +32,7 @@ Products
 
            {% for product in products %}
            <tr>
-               <td>{{ product.name }}</td>
+               <td><a href="{% url 'product_detail' product.id %}">{{ product.name }}</td>
                <td>{{ product.description|truncatechars:15 }}</td>
                <td>{{ product.category.name }}</td>
                <td> {% for productmaterial in product.materials.all %}
