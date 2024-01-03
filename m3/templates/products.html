@@ -16,12 +16,10 @@ Products
         {{ filterset.form.as_p }}
         <input type="submit" value="Найти" />
     </form>
-
-
-   <hr>
+    <br>
    {% if products %}
        <table align="center">
-           <tr>
+           <tr align="center">
                <td>Название</td>
                <td>Описание</td>
                <td>Категория</td>
@@ -31,7 +29,7 @@ Products
            </tr>
 
            {% for product in products %}
-           <tr>
+           <tr align="center">
                <td><a href="{% url 'product_detail' product.id %}">{{ product.name }}</td>
                <td>{{ product.description|truncatechars:15 }}</td>
                <td>{{ product.category.name }}</td>
